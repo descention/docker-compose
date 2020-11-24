@@ -26,5 +26,12 @@ services:
       - 80:80/tcp
       - 443:443/tcp
     volumes:
-      - ${CACHE_ROOT}/cache:/data/cache
-      - ${CACHE_ROOT}/logs:/data/logs
+      - lancache/cache:/data/cache
+      - lancache/logs:/data/logs
+
+volumes:
+  lancache:
+    driver_opts:
+      type: "nfs"
+      o: "nfsvers=4,addr=ds120j,nolock,soft,rw"
+      device: ":/volume1/lancache"
